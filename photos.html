@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メニュー写真</title>
+    <style>
+        body {
+            font-family: 'Yu Gothic', '思源宋体', sans-serif;
+            margin: 0;
+            background: #fff8f0;
+            text-align: center;
+        }
+        .gallery {
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        .gallery img {
+            width: 100%;
+            max-height: 500px;
+            display: none;
+        }
+        .gallery img.active {
+            display: block;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            background: #c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background: #900;
+        }
+    </style>
+</head>
+<body>
+    <h1>メニュー写真</h1>
+    <div class="gallery">
+        <img src="./assets/ji.jpg" alt="料理1" class="active">
+        <img src="./assets/main-dish-1.jpg" alt="料理2">
+        <img src="./assets/图片_202501041215201.jpg" alt="料理3">
+    </div>
+    <div class="controls">
+        <button onclick="prevImage()">前へ</button>
+        <button onclick="nextImage()">次へ</button>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery img');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        function prevImage() {
+            showImage(currentIndex - 1);
+        }
+
+        function nextImage() {
+            showImage(currentIndex + 1);
+        }
+    </script>
+</body>
+</html>
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch HTML File",
+      "file": "${workspaceFolder}/${input:htmlFile}"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "htmlFile",
+      "description": "Select the HTML file to debug",
+      "options": [
+        "index.html",
+        "photos.html"
+      ]
+    }
+  ]
+}
