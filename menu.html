@@ -8,7 +8,7 @@
         body {
             font-family: 'Yu Gothic', '思源宋体', sans-serif;
             margin: 0;
-            background: #fff8f0;
+            background: linear-gradient(to bottom, #fff8f0, #ffe4d1);
             text-align: center;
         }
         .header {
@@ -17,6 +17,7 @@
             color: white;
             text-align: center;
             position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .home-button {
             position: absolute;
@@ -27,41 +28,123 @@
             padding: 10px 20px;
             text-decoration: none;
             border: 2px solid #c00;
-            border-radius: 5px;
+            border-radius: 25px;
             font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         .home-button:hover {
             background: #c00;
             color: #fff;
         }
-        .gallery {
+        .menu-section {
             margin: 50px auto;
             max-width: 800px;
             text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .gallery img {
+        .menu-section h2 {
+            font-size: 24px;
+            color: #fff;
+            background: #c00;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .menu-section h2.special {
+            font-size: 28px;
+            background: linear-gradient(45deg, #ff6f61, #c00);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #fff;
+        }
+        .menu-section h2.special:hover {
+            background: linear-gradient(45deg, #c00, #ff6f61);
+            transform: scale(1.1);
+        }
+        .menu-section img {
             width: 100%;
             max-height: 500px;
             display: none;
-        }
-        .gallery img.active {
-            display: block;
-        }
-        .controls {
+            border: 5px solid #c00;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
         }
-        .controls button {
+        .menu-section img.active {
+            display: block;
+        }
+        .category-buttons {
+            display: none;
+            margin-top: 20px;
+        }
+        .category-buttons button {
             padding: 10px 20px;
+            margin: 10px;
             font-size: 16px;
-            margin: 0 10px;
             background: #c00;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        .controls button:hover {
+        .category-buttons button:hover {
             background: #900;
+            transform: scale(1.05);
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            height: 500px; /* 固定高度，确保布局不变 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid #c00;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #fff8f0;
+        }
+        .image-container img {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+            border-radius: 10px;
+        }
+        .image-container img.active {
+            display: block;
+        }
+        /* 添加关闭按钮样式 */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #c00;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .close-button:hover {
+            background: #900;
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -70,31 +153,74 @@
         <h1>メニュー写真</h1>
         <a href="index.html" class="home-button">ホーム</a>
     </div>
-    <div class="gallery">
-        <img src="" alt="料理1" class="active">
-        <img src="" alt="料理2">
-        <img src="" alt="料理3">
-        <div class="controls">
-            <button onclick="prevImage()">前へ</button>
-            <button onclick="nextImage()">次へ</button>
+    <div class="menu-section">
+        <h2 class="special" onclick="showCategories()">すべての料理</h2>
+        <div class="category-buttons" style="display: none;">
+            <button onclick="showImage('appetizer')">前菜</button>
+            <button onclick="showImage('dish')">一品料理</button>
+            <button onclick="showImage('seafood')">海鮮料理</button>
+            <button onclick="showImage('noodles')">麵類</button>
+            <button onclick="showImage('rice')">ご飯</button>
+            <button onclick="showImage('dessert')">点心</button>
+        </div>
+        <div class="image-container" style="display: none;">
+            <button class="close-button" onclick="closeImage(this)">×</button>
+            <img id="appetizer" src="./assets/appetizer.png" alt="前菜">
+            <img id="dish" src="./assets/dish.png" alt="一品料理">
+            <img id="seafood" src="./assets/seafood.png" alt="海鮮料理">
+            <img id="noodles" src="./assets/noodles.png" alt="麵類">
+            <img id="rice" src="./assets/rice.png" alt="ご飯">
+            <img id="dessert" src="./assets/dessert.png" alt="点心">
+        </div>
+    </div>
+    <div class="menu-section">
+        <h2 class="special" onclick="showImage('lunch')">ランチメニュー</h2>
+        <h2 class="special" onclick="showImage('ramen')">ラーメンセット</h2>
+        <h2 class="special" onclick="showImage('beer')">お酒セット</h2>
+        <div class="image-container" style="display: none;">
+            <button class="close-button" onclick="closeImage(this)">×</button>
+            <img id="lunch" src="./assets/ランチメ二ュ-.png" alt="ランチメニュー">
+            <img id="ramen" src="./assets/ラーメンセット.png" alt="ラーメンセット">
+            <img id="beer" src="./assets/お酒セット.png" alt="お酒セット">
         </div>
     </div>
     <script>
-        const images = document.querySelectorAll('.gallery img');
-        let currentIndex = 0;
-
-        function showImage(index) {
-            images[currentIndex].classList.remove('active');
-            currentIndex = (index + images.length) % images.length;
-            images[currentIndex].classList.add('active');
+        function showCategories() {
+            const categoryButtons = document.querySelector('.category-buttons');
+            categoryButtons.style.display = categoryButtons.style.display === 'none' ? 'block' : 'none';
         }
 
-        function prevImage() {
-            showImage(currentIndex - 1);
+        function showImage(id) {
+            // 获取所有图片容器
+            const containers = document.querySelectorAll('.image-container');
+            
+            // 显示对应的图片容器
+            containers.forEach(container => {
+                if (container.querySelector(`#${id}`)) {
+                    container.style.display = 'flex';
+                    container.querySelector('.close-button').style.display = 'block';
+                }
+            });
+
+            // 隐藏所有图片
+            const images = document.querySelectorAll('.image-container img');
+            images.forEach(img => img.style.display = 'none');
+
+            // 显示选中的图片
+            const selectedImage = document.getElementById(id);
+            if (selectedImage) {
+                selectedImage.style.display = 'block';
+            }
         }
 
-        function nextImage() {
-            showImage(currentIndex + 1);
+        function closeImage(button) {
+            const container = button.parentElement;
+            container.style.display = 'none';
+            button.style.display = 'none';
+            
+            // 隐藏容器内的所有图片
+            const images = container.querySelectorAll('img');
+            images.forEach(img => img.style.display = 'none');
         }
     </script>
 </body>
