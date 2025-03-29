@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メニュー</title>
+    <style>
+        body {
+            font-family: 'Yu Gothic', '思源宋体', sans-serif;
+            margin: 0;
+            background: #fff8f0;
+            text-align: center;
+        }
+        .header {
+            background: #c00;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #fff;
+            color: #c00;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 2px solid #c00;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .home-button:hover {
+            background: #c00;
+            color: #fff;
+        }
+        .gallery {
+            margin: 50px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-height: 500px;
+            display: none;
+        }
+        .gallery img.active {
+            display: block;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            background: #c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background: #900;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>メニュー写真</h1>
+        <a href="index.html" class="home-button">ホーム</a>
+    </div>
+    <div class="gallery">
+        <img src="" alt="料理1" class="active">
+        <img src="" alt="料理2">
+        <img src="" alt="料理3">
+        <div class="controls">
+            <button onclick="prevImage()">前へ</button>
+            <button onclick="nextImage()">次へ</button>
+        </div>
+    </div>
+    <script>
+        const images = document.querySelectorAll('.gallery img');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        function prevImage() {
+            showImage(currentIndex - 1);
+        }
+
+        function nextImage() {
+            showImage(currentIndex + 1);
+        }
+    </script>
+</body>
+</html>

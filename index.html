@@ -10,68 +10,166 @@
     
     <!-- 样式设计 -->
     <style>
-        * { font-family: 'Yu Gothic', '思源宋体', sans-serif; }
-        body { margin: 0; background: #fff8f0; }
+        * {
+            font-family: 'Yu Gothic', '思源宋体', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background: linear-gradient(to bottom, #fff8f0, #ffe4d1);
+        }
         
         /* 顶部导航 */
         .header {
-            background: #c00; padding: 30px;
-            color: white; text-align: center;
+            background: #c00;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .menu-button, .home-button {
+            position: absolute;
+            top: 20px;
+            background: #fff;
+            color: #c00;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 2px solid #c00;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         .menu-button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: #fff;
-        color: #c00;
-        padding: 10px 20px;
-        text-decoration: none;
-        border: 2px solid #c00;
-        border-radius: 5px;
-        font-size: 14px;
-    }
+            right: 20px;
+        }
+        .home-button {
+            left: 20px;
+        }
+        .menu-button:hover, .home-button:hover {
+            background: #c00;
+            color: #fff;
+            transform: scale(1.1);
+        }
 
-    .menu-button:hover {
-        background: #c00;
-        color: #fff;
-    }
+        /* 标题样式 */
+        .title {
+            font-family: 'KaiTi', '楷体', serif;
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
 
-    .header {
-        position: relative; /* 确保子元素可以定位 */
-    }
+        /* 地图和预约 */
+        .content {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 28px;
+            color: #c00;
+            margin-bottom: 20px;
+        }
+        .content iframe {
+            border: 5px solid #c00;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .content a {
+            display: block;
+            margin: 30px auto;
+            background: #c00;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 25px;
+            width: 200px;
+        }
+
+        /* 照片展示样式 */
+        .gallery {
+            margin: 50px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-height: 500px;
+            display: none;
+        }
+        .gallery img.active {
+            display: block;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            background: #c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background: #900;
+        }
+
+        /* 手机屏幕适配 */
+        @media (max-width: 768px) {
+            .gallery img {
+                max-height: 300px;
+            }
+            .controls button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- 头部 -->
     <div class="header">
-        <h1>菜里香</h1>
+        <h1 class="title">菜里香</h1>
         <p>营业时间 11:00-23:00（火曜日休み）</p>
-        <a href="./photos.html" class="menu-button" >メニュー</a>
+        <a href="./menu.html" class="menu-button">メニュー</a>
+        <a href="#" class="home-button">ホーム</a>
     </div>
     <!-- 地图和预约 -->
-    <div style="padding: 50px 20px; text-align: center;">
+    <div class="content">
         <h2>アクセス</h2>
         <!-- 替换为您的Google地图嵌入代码 -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1608.5340640158556!2d139.6505836!3d36.2621249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601f377aaa01177b%3A0x9487a587ff4867e7!2z5Y-w5rm-5paZ55CGIOiPnOmHjOmmmQ!5e0!3m2!1szh-CN!2sjp!4v1743171329464!5m2!1szh-CN!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1608.5340640158556!2d139.6505836!3d36.2621249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601f377aaa01177b%3A0x9487a587ff4867e7!2z5Y-w5rm-5paZ55CGIOiPnOmHjOmmmQ!5e0!3m2!1szh-CN!2sjp!4v1743171329464!5m2!1szh-CN!2sjp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             
-        <a href="tel:03-1234-5678" 
-           style="display: block; margin: 30px; 
-                  background: #c00; color: white; 
-                  padding: 15px; text-decoration: none;">
+        <a href="tel:0282-217-087">
             📞 電話予約：0282-217-087
         </a>
     </div>
 
     <!-- 自动轮播脚本 -->
     <script>
-        let current = 0;
-        const images = document.querySelectorAll('.carousel img');
-        
-        setInterval(() => {
-            images[current].classList.remove('active');
-            current = (current + 1) % images.length;
-            images[current].classList.add('active');
-        }, 3000); // 3秒切换图片
+        const images = document.querySelectorAll('.gallery img');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (index + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        function prevImage() {
+            showImage(currentIndex - 1);
+        }
+
+        function nextImage() {
+            showImage(currentIndex + 1);
+        }
     </script>
 </body>
 </html>
