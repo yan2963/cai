@@ -105,7 +105,7 @@
             width: 100%;
             max-width: 800px;
             margin: 20px auto;
-            height: 500px; /* 固定高度，确保布局不变 */
+            height: 400px; /* 将原来的 500px 改为 400px */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,6 +145,19 @@
         .close-button:hover {
             background: #900;
             transform: scale(1.1);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .image-container {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-container {
+                height: 250px;
+            }
         }
     </style>
 </head>
